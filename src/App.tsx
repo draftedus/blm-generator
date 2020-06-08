@@ -72,7 +72,7 @@ function App() {
             </form>
             <div className="copy-code">
                 <textarea readOnly id="copy-code-text" ref={clipboard.target} value={generatedScript} />
-                <button onClick={clipboard.copy}>Copy</button>
+                <button onClick={clipboard.copy}>{clipboard.copied ? 'Copied' : 'Copy'}</button>
             </div>
         </div>
     );
