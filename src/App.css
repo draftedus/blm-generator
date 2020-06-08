@@ -89,6 +89,11 @@ textarea {
     justify-content: center;
 }
 
+.section-info {
+    display: flex;
+    justify-content: center;
+}
+
 .section-info button {
     width: 360px;
 }
