@@ -1,6 +1,5 @@
 import React, {FormEvent, useState} from 'react';
 import { useClipboard } from 'use-clipboard-copy';
-import './App.css';
 
 // {
 //     font: 'Inter, sans-serif',
