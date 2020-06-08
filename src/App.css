@@ -4,22 +4,69 @@ html, body {
     padding: 0;
 }
 
+input {
+    padding: 15px;
+    border: 1px solid var(--main-text-color);;
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);;
+    text-outline: none;
+}
+iframe {
+    background-color: white;
+    width: 100%;
+}
 .app {
     /*colors*/
     --main-bg-color: black;
+    --main-text-color: white;
     --main-border-color: #C4C4C4;
     width: 100%;
     background-color: var(--main-bg-color);
     height: 100vh;
+    color: var(--main-text-color);
 }
 
 .app__form {
     margin: 0 auto;
     max-width: 980px;
+
 }
 
+.inputRow {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.inputGroup {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+label {
+    padding-bottom: 15px;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: bold;
+}
+
+
 .section {
-    border-top: 2px solid var(--main-border-color);
     padding-top: 80px;
     padding-bottom: 80px;
+}
+
+.customize {
+    border-top: 2px solid var(--main-border-color);
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+    justify-content: center;
+}
+h1 {
+    color: var(--main-text-color);;
 }
