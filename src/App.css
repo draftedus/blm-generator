@@ -103,6 +103,7 @@ textarea {
     justify-content: center;
     align-items: top;
     margin-top: 100px;
+    color: black;
 }
 
 .copy-code button {
