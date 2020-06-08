@@ -89,6 +89,9 @@ textarea {
     justify-content: center;
 }
 
+.section-info button {
+    width: 360px;
+}
 
 .copy-code {
     display: flex;
@@ -97,5 +100,8 @@ textarea {
     margin-top: 100px;
 }
 
+.copy-code button {
+    margin-left: 30px;
+}
 
 
