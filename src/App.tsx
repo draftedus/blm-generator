@@ -1,4 +1,5 @@
 import React, {FormEvent, useState} from 'react';
+import { useClipboard } from 'use-clipboard-copy';
 import './App.css';
 
 // {
@@ -13,12 +14,22 @@ function App() {
     const [fontFamily, setFontFamily] = useState("Inter, sans-serif");
     const [bgColor, setBgColor] = useState("#000000");
     const [textColor, setTextColor] = useState("#FFFFFF");
-    const [shouldTrack, setShouldTrack] = useState(true);
-    const [showLearnLink, setShowLearnLink] = useState(true);
+    const clipboard = useClipboard({ copiedTimeout: 750 });
+
+    const generatedScript = `<script>
+    !function(){var e=window.BLM=window.BLM||[];e.initialized?window.console&&console.error&&console.error("BLM snippet already called")
+    :(e.initialized=!0,e.load=function(o){var r=document.createElement("script");r.type="text/javascript",r.src="../dist/blm.js";
+    var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(r,t),e._loadOptions=o},
+    e.load({ name: "${companyName}", primaryColor: "${textColor}", backgroundColor: "${bgColor}" }))
+    }();
+</script>`;
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        
     }
+
 
     return (
         <div className="app">
@@ -67,18 +78,15 @@ function App() {
                         </div>
                     </div>
                 </div>
-                <div className="section info">
-                    <div>
-                    <input type="checkbox" id="track" name="track" value="track"/>
-                    <span> Track my install to add me to the list </span><br/>
-                    </div>
-                    <div>
-                    <input type="checkbox" id="learnLink" name="learnLink" value="learnLink"/>
-                    <span> Display a link back to blacklivesmatter.tech in my banner </span><br/>
-                    </div>
+                <div className="section-info">
+
+                    <button type="submit">Get Embed Code</button>
                 </div>
             </form>
-
+            <div className="copy-code">
+                <textarea readOnly id="copy-code-text" ref={clipboard.target}>{generatedScript}</textarea>
+                <button onClick={clipboard.copy}>Copy</button>
+            </div>
         </div>
     );
 }

@@ -15,6 +15,32 @@ iframe {
     background-color: white;
     width: 100%;
 }
+label {
+    padding-bottom: 15px;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: bold;
+}
+h1 {
+    color: var(--main-text-color);;
+}
+button {
+    width: 210px;
+    height: 70px;
+    background-color: black;
+    border: 1px solid white;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 10px;
+    cursor: pointer;
+}
+textarea {
+    width: 580px;
+    height: 155px;
+}
+
+
 .app {
     /*colors*/
     --main-bg-color: black;
@@ -44,12 +70,6 @@ iframe {
     flex-flow: column nowrap;
 }
 
-label {
-    padding-bottom: 15px;
-    font-size: 18px;
-    line-height: 22px;
-    font-weight: bold;
-}
 
 
 .section {
@@ -67,6 +87,14 @@ label {
     flex-flow: column nowrap;
     justify-content: center;
 }
-h1 {
-    color: var(--main-text-color);;
+
+
+.copy-code {
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    margin-top: 100px;
 }
+
+
+
