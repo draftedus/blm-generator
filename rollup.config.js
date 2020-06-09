@@ -8,7 +8,7 @@ export default {
   input: "src/index.tsx",
   output: {
     format: "iife",
-    file: "dist/blm-weblow-form.min.js", // intentionally mispelled for webflow now
+    file: "dist/blm-webflow-form.min.js",
   },
   plugins: [
     replace({
