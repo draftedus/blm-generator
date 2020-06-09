@@ -17,6 +17,9 @@ export const Form = styled.form`
 export const TextArea = styled.textarea`
   width: 580px;
   height: 155px;
+  &:focus {
+  outline:0;
+  }
 `;
 
 export const Button = styled.button`
@@ -29,9 +32,15 @@ export const Button = styled.button`
   font-weight: bold;
   margin: 0 10px;
   cursor: pointer;
+  transition: all 0.2s linear;
+
   &:hover {
     background-color: white;
     color: black;
+    transition: all 0.2s linear;
+  }
+  &:focus {
+  outline:0;
   }
 `;
 
@@ -69,6 +78,9 @@ export const Input = styled.input`
   text-outline: none;
   font-weight: bold;
   font-size: 18px;
+  &:focus {
+  outline:0;
+  }
 `;
 
 export const SpacedInput = styled(Input)`
