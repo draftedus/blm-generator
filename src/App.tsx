@@ -13,18 +13,20 @@ function App() {
     const [bgColor, setBgColor] = useState("#000000");
     const [textColor, setTextColor] = useState("#FFFFFF");
     const clipboard = useClipboard({ copiedTimeout: 750 });
-    const [generatedScript, setGeneratedScript] = useState("");
+    const [scriptProps, setScriptProps] = useState({ companyName: "Drafted", bgColor: "#000000", textColor: "#FFFFFF" });
+
+    const generatedScript = `<script>
+        !function(){var e=window.BLM=window.BLM||[];e.initialized?window.console&&console.error&&console.error("BLM snippet already called")
+        :(e.initialized=!0,e.load=function(o){var r=document.createElement("script");r.type="text/javascript",r.src="//blmtech.s3.amazonaws.com/blm.min.js";
+        var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(r,t),e._loadOptions=o},
+        e.load({ name: "${scriptProps.companyName}", primaryColor: "${scriptProps.textColor}", backgroundColor: "${scriptProps.bgColor}" }))
+        }();
+    </script>
+    `;
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
-        setGeneratedScript(`<script>
-    !function(){var e=window.BLM=window.BLM||[];e.initialized?window.console&&console.error&&console.error("BLM snippet already called")
-    :(e.initialized=!0,e.load=function(o){var r=document.createElement("script");r.type="text/javascript",r.src="//blmtech.s3.amazonaws.com/blm.min.js";
-    var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(r,t),e._loadOptions=o},
-    e.load({ name: "${companyName}", primaryColor: "${textColor}", backgroundColor: "${bgColor}" }))
-    }();
-</script>`);
+        setScriptProps({ companyName, bgColor, textColor });
     };
 
 
@@ -66,7 +68,7 @@ function App() {
                     </div>
                 </div>
                 <div className="section-info">
-                    <button type="submit">Get Embed Code</button>
+                    <button type="submit">Refresh Embed Code</button>
                 </div>
             </form>
             <div className="copy-code">

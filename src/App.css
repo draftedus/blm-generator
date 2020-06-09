@@ -78,10 +78,6 @@ textarea {
     padding-bottom: 80px;
 }
 
-.customize {
-    border-top: 2px solid var(--main-border-color);
-}
-
 .info {
     display: flex;
     align-items: center;
