@@ -1,182 +1,96 @@
-import React, {FormEvent, useState} from 'react';
-import { useClipboard } from 'use-clipboard-copy';
-import styled from 'styled-components';
+import React, { FormEvent, useState } from "react";
+import { useClipboard } from "use-clipboard-copy";
+import { getInjectScript } from "./helpers";
+import "./App.styled";
+import {
+  Button,
+  CopyCode,
+  CustomizeSection,
+  Form,
+  Input,
+  InputGroup,
+  InputRow,
+  Label,
+  SectionInfo,
+  SpacedInput,
+  StyledApp,
+  TextArea,
+} from "./App.styled";
 
-const AppClass = styled.div`
-    width: 100%;
-    background-color: black;
-    color: white;
-    font-family: Inter, sans-serif;
-`;
-
-const Form = styled.form`
-    margin: 0 auto;
-    max-width: 980px;
-`;
-
-const TextArea = styled.textarea`
-    width: 580px;
-    height: 155px;
-`;
-
-const Button = styled.button`
-    width: 210px;
-    height: 70px;
-    background-color: black;
-    border: 1px solid white;
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0 10px;
-    cursor: pointer;
-    &:hover {
-    background-color: white;
-    color: black;
-    }
-`;
-
-const CustomizeSection = styled.div`
-    padding-top: 70px;
-    padding-bottom: 80px;
-    border-top: 2px solid #C4C4C4;
-`;
-
-const InputRow = styled.div`
-    display: flex;
-    flex-flow: row wrap;
-    width: 100%;
-    justify-content: space-between;
-`;
-
-const InputGroup = styled.div`
-    display: flex;
-    flex-flow: column nowrap;
-    padding-top: 10px;
-`;
-
-const Label = styled.label`
-    padding-bottom: 15px;
-    font-size: 18px;
-    line-height: 22px;
-    font-weight: bold;
-`;
-
-const Input = styled.input`
-    padding: 15px;
-    border: 1px solid white;
-    background-color: black;
-    color: white;
-    text-outline: none;
-    font-weight: bold;
-    font-size: 18px;
-`;
-
-const SpacedInput = styled(Input)`
-    letter-spacing: 0.1em;
-`;
-
-const SectionInfo = styled.div`
-    display: flex;
-    justify-content: center;
-    button {
-      width: 360px;
-    }
-`;
-
-const CopyCode = styled.div `
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    margin-top: 100px;
-    color: black;
-    padding-bottom: 80px;
-
-    button {
-        margin-left: 30px;
-    }
-`;
+const DEFAULT_SCRIPT_PROPS = {
+  companyName: "Drafted",
+  bgColor: "#000000",
+  textColor: "#FFFFFF",
+};
+const DEFAULT_SCRIPT = getInjectScript(
+  DEFAULT_SCRIPT_PROPS.companyName,
+  DEFAULT_SCRIPT_PROPS.bgColor,
+  DEFAULT_SCRIPT_PROPS.textColor
+);
 
 function App() {
+  const [companyName, setCompanyName] = useState(
+    DEFAULT_SCRIPT_PROPS.companyName
+  );
+  const [bgColor, setBgColor] = useState(DEFAULT_SCRIPT_PROPS.bgColor);
+  const [textColor, setTextColor] = useState(DEFAULT_SCRIPT_PROPS.textColor);
+  const [generatedScript, setGeneratedScript] = useState(DEFAULT_SCRIPT);
+  const clipboard = useClipboard({ copiedTimeout: 750 });
 
-    const [companyName, setCompanyName] = useState("Drafted");
-    const [bgColor, setBgColor] = useState("#000000");
-    const [textColor, setTextColor] = useState("#FFFFFF");
-    const clipboard = useClipboard({ copiedTimeout: 750 });
-    const [scriptProps, setScriptProps] = useState({ companyName: "Drafted", bgColor: "#000000", textColor: "#FFFFFF" });
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const script = getInjectScript(companyName, bgColor, textColor);
+    setGeneratedScript(script);
+  };
 
-    const generatedScript = `<script>
-        !function(){var e=window.BLM=window.BLM||[];e.initialized?window.console&&console.error&&console.error("BLM snippet already called")
-        :(e.initialized=!0,e.load=function(o){var r=document.createElement("script");r.type="text/javascript",r.src="//blmtech.s3.amazonaws.com/blm.min.js";
-        var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(r,t),e._loadOptions=o},
-        e.load({ name: "${scriptProps.companyName}", primaryColor: "${scriptProps.textColor}", backgroundColor: "${scriptProps.bgColor}" }))
-        }();
-    </script>
-    `;
-
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setScriptProps({ companyName, bgColor, textColor });
-    };
-
-    return (
-        <AppClass>
-            <Form onSubmit={handleSubmit}>
-                <CustomizeSection>
-                    <InputRow>
-                        <InputGroup>
-                            <Label>
-                                Company Name
-                            </Label>
-                            <Input
-                                type="text"
-                                value={companyName}
-                                onChange={e => setCompanyName(e.target.value)}
-                            />
-                        </InputGroup>
-                        <InputGroup>
-                            <Label>
-                                Text Color
-                            </Label>
-                            <SpacedInput
-                                type="text"
-                                value={textColor}
-                                onChange={e => setTextColor(e.target.value)}
-                            />
-                        </InputGroup>
-                        <InputGroup>
-                            <Label>
-                                BG Color
-                            </Label>
-                            <SpacedInput
-                                type="text"
-                                value={bgColor}
-                                onChange={e => setBgColor(e.target.value)}
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div className="section-info">
-                    <button type="submit">Refresh Embed Code</button>
-                </div>
-            </form>
-            <div className="copy-code">
-                <textarea readOnly id="copy-code-text" ref={clipboard.target} value={generatedScript} />
-                <button onClick={clipboard.copy}>{clipboard.copied ? 'Copied' : 'Copy'}</button>
-            </div>
-        </div>
-                        </InputGroup>
-                    </InputRow>
-                </CustomizeSection>
-                <SectionInfo>
-                    <Button type="submit">Get Embed Code</Button>
-                </SectionInfo>
-            </Form>
-            <CopyCode>
-                <TextArea readOnly id="copy-code-text" ref={clipboard.target} value={generatedScript} />
-                <Button onClick={clipboard.copy}>{clipboard.copied ? 'Copied' : 'Copy'}</Button>
-            </CopyCode>
-        </AppClass>
-    );
+  return (
+    <StyledApp>
+      <Form onSubmit={handleSubmit}>
+        <CustomizeSection>
+          <InputRow>
+            <InputGroup>
+              <Label>Company Name</Label>
+              <Input
+                type="text"
+                value={companyName}
+                onChange={(e) => setCompanyName(e.target.value)}
+              />
+            </InputGroup>
+            <InputGroup>
+              <Label>Text Color</Label>
+              <SpacedInput
+                type="text"
+                value={textColor}
+                onChange={(e) => setTextColor(e.target.value)}
+              />
+            </InputGroup>
+            <InputGroup>
+              <Label>BG Color</Label>
+              <SpacedInput
+                type="text"
+                value={bgColor}
+                onChange={(e) => setBgColor(e.target.value)}
+              />
+            </InputGroup>
+          </InputRow>
+        </CustomizeSection>
+        <SectionInfo>
+          <Button type="submit">Refresh Embed Code</Button>
+        </SectionInfo>
+      </Form>
+      <CopyCode>
+        <TextArea
+          readOnly
+          id="copy-code-text"
+          ref={clipboard.target}
+          value={generatedScript}
+        />
+        <Button onClick={clipboard.copy}>
+          {clipboard.copied ? "Copied" : "Copy"}
+        </Button>
+      </CopyCode>
+    </StyledApp>
+  );
 }
 
 export default App;
