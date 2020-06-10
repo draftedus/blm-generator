@@ -16,8 +16,8 @@ import {
   TextArea,
   CheckBox,
   CheckBoxSection,
+  SpacedInput,
 } from './App.styled';
-import ColorPickerInput from './components/color-picker-input/ColorPickerInput';
 
 /**
  * Grab the script URL we are using to generate the snippet
@@ -95,16 +95,18 @@ const App: React.FC = () => {
             </InputGroup>
             <InputGroup>
               <Label>Text Color</Label>
-              <ColorPickerInput
+              <SpacedInput
+                type="text"
                 value={textColor}
-                onChange={(v) => setTextColor(v?.toUpperCase())}
+                onChange={(e) => setTextColor(e?.target?.value)}
               />
             </InputGroup>
             <InputGroup>
               <Label>BG Color</Label>
-              <ColorPickerInput
+              <SpacedInput
+                type="text"
                 value={bgColor}
-                onChange={(v) => setBgColor(v?.toUpperCase())}
+                onChange={(e) => setBgColor(e?.target?.value)}
               />
             </InputGroup>
           </InputRow>
