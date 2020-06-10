@@ -20,6 +20,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "rollup src/index.tsx --config rollup.config.js",
+    "format": "prettier --single-quote --trailing-comma all --write src/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -43,10 +44,21 @@
     "@rollup/plugin-node-resolve": "^8.0.1",
     "@rollup/plugin-replace": "^2.3.3",
     "@rollup/plugin-typescript": "^4.1.2",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.9",
+    "prettier": "^2.0.5",
     "rollup": "^2.14.0",
     "rollup-plugin-uglify": "^6.0.4",
     "tslib": "^2.0.0",
     "typescript": "^3.9.5",
     "webpack-cli": "^3.3.11"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{ts,js,tsx,jsx}": "prettier --single-quote --trailing-comma all --write"
   }
 }

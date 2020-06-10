@@ -9,7 +9,7 @@ export const getInjectScript = (
   companyName: string,
   bgColor: string,
   textColor: string,
-  scriptUrl: string
+  scriptUrl: string,
 ): string => {
   return `<script>
     !function(){var e=window.BLM=window.BLM||[];e.initialized?window.console&&console.error&&console.error("BLM snippet already called")
@@ -26,4 +26,4 @@ export const getInjectScript = (
 export const getScriptAttribute = (attr: string): string | null => {
   const scripts = document.getElementsByTagName('script');
   return scripts[scripts.length - 1]?.getAttribute(attr);
-}
+};

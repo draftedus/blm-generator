@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 // Styles for App component
 
@@ -18,7 +18,7 @@ export const TextArea = styled.textarea`
   width: 580px;
   height: 155px;
   &:focus {
-  outline:0;
+    outline: 0;
   }
 `;
 
@@ -40,7 +40,7 @@ export const Button = styled.button`
     transition: all 0.2s linear;
   }
   &:focus {
-  outline:0;
+    outline: 0;
   }
 `;
 
@@ -79,7 +79,7 @@ export const Input = styled.input`
   font-weight: bold;
   font-size: 18px;
   &:focus {
-  outline:0;
+    outline: 0;
   }
 `;
 
