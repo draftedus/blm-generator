@@ -18,6 +18,7 @@ import {
   CheckBoxSection,
   SpacedInput,
   Domains,
+  UsedByContainer,
 } from './App.styled';
 import { getDomains } from './metrics';
 
@@ -155,13 +156,16 @@ const App: React.FC = () => {
           {clipboard.copied ? 'Copied' : 'Copy'}
         </Button>
       </CopyCode>
-      <Domains>
-        {domains.map((d: { companyName: string; domain: string }) => (
-          <a href={fullUrl(d.domain)} target="_blank">
-            {d.companyName}
-          </a>
-        ))}
-      </Domains>
+      <UsedByContainer>
+        <h3>Used By</h3>
+        <Domains>
+          {domains.map((d: { companyName: string; domain: string }) => (
+            <a href={fullUrl(d.domain)} target="_blank">
+              {d.companyName}
+            </a>
+          ))}
+        </Domains>
+      </UsedByContainer>
     </StyledApp>
   );
 };

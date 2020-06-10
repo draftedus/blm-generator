@@ -125,9 +125,19 @@ export const CheckBoxLabel = styled.span`
   font-weight: bold;
 `;
 
+export const UsedByContainer = styled.div`
+  max-width: 600px;
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 50px;
+`;
+
 export const Domains = styled.div`
   display: flex;
-  flex-flow: row nowrap;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   a {
