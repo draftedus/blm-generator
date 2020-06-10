@@ -3,21 +3,21 @@
  * @param companyName: name of the company
  * @param bgColor
  * @param textColor
- * @param allowMetrics
+ * @param metricsEnabled
  * @param scriptUrl
  */
 export const getInjectScript = (
   companyName: string,
   bgColor: string,
   textColor: string,
-  allowMetrics: boolean,
+  metricsEnabled: boolean,
   scriptUrl: string,
 ): string => {
   return `<script>
     (function(b,l,a,c,k){var e=b.BLM=b.BLM||[];e.initialized?b.console&&console.error&&console.error("BLM snippet already called")
     :(e.initialized=!0,e.load=function(o){var r=l.createElement(a);r.type="text/javascript",r.src=c;
     var t=l.getElementsByTagName(a)[0];t.parentNode.insertBefore(r,t),e._loadOptions=o},
-    e.load({ name: "${companyName}", primaryColor: "${textColor}", backgroundColor: "${bgColor}", allowMetrics: ${allowMetrics} }))
+    e.load({ name: "${companyName}", primaryColor: "${textColor}", backgroundColor: "${bgColor}", metricsEnabled: ${metricsEnabled} }))
     })(window, document, "script", "${scriptUrl}");
 </script>`;
 };

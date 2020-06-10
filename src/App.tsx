@@ -33,7 +33,7 @@ const DEFAULT_SCRIPT_PROPS = {
   companyName: 'Drafted',
   bgColor: '#000000',
   textColor: '#FFFFFF',
-  allowMetrics: false,
+  metricsEnabled: false,
 };
 
 /**
@@ -43,7 +43,7 @@ const DEFAULT_SCRIPT = getInjectScript(
   DEFAULT_SCRIPT_PROPS.companyName,
   DEFAULT_SCRIPT_PROPS.bgColor,
   DEFAULT_SCRIPT_PROPS.textColor,
-  DEFAULT_SCRIPT_PROPS.allowMetrics,
+  DEFAULT_SCRIPT_PROPS.metricsEnabled,
   scriptUrl,
 );
 
@@ -58,8 +58,8 @@ const App: React.FC = () => {
   );
   const [bgColor, setBgColor] = useState(DEFAULT_SCRIPT_PROPS.bgColor);
   const [textColor, setTextColor] = useState(DEFAULT_SCRIPT_PROPS.textColor);
-  const [allowMetrics, setAllowMetrics] = useState(
-    DEFAULT_SCRIPT_PROPS.allowMetrics,
+  const [metricsEnabled, setMetricsEnabled] = useState(
+    DEFAULT_SCRIPT_PROPS.metricsEnabled,
   );
   const [generatedScript, setGeneratedScript] = useState(DEFAULT_SCRIPT);
   const clipboard = useClipboard({ copiedTimeout: 750 });
@@ -74,7 +74,7 @@ const App: React.FC = () => {
       companyName,
       bgColor,
       textColor,
-      allowMetrics,
+      metricsEnabled,
       scriptUrl,
     );
     setGeneratedScript(script);
@@ -112,8 +112,8 @@ const App: React.FC = () => {
         <CheckBoxSection>
           <CheckBox
             type="checkbox"
-            checked={allowMetrics}
-            onChange={() => setAllowMetrics(!allowMetrics)}
+            checked={metricsEnabled}
+            onChange={() => setMetricsEnabled(!metricsEnabled)}
           />
           <CheckBoxLabel>
             Add me to the list below when I install this
