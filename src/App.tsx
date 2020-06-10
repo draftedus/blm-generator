@@ -1,6 +1,6 @@
 import React, { FormEvent, useState } from "react";
 import { useClipboard } from "use-clipboard-copy";
-import { getInjectScript } from "./helpers";
+import {getInjectScript, getScriptAttribute} from "./helpers";
 import {
   Button,
   CopyCode,
@@ -17,6 +17,11 @@ import {
 } from "./App.styled";
 
 /**
+ * Grab the script URL we are using to generate the snippet
+ */
+const scriptUrl = getScriptAttribute('data-script-url') ?? '//blmtech.s3.amazonaws.com/blm.min.js';
+
+/**
  * Set our default props for the WYSIWYG preview
  */
 const DEFAULT_SCRIPT_PROPS = {
@@ -31,7 +36,8 @@ const DEFAULT_SCRIPT_PROPS = {
 const DEFAULT_SCRIPT = getInjectScript(
   DEFAULT_SCRIPT_PROPS.companyName,
   DEFAULT_SCRIPT_PROPS.bgColor,
-  DEFAULT_SCRIPT_PROPS.textColor
+  DEFAULT_SCRIPT_PROPS.textColor,
+  scriptUrl
 );
 
 /**
@@ -53,7 +59,7 @@ const App: React.FC = () => {
    */
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const script = getInjectScript(companyName, bgColor, textColor);
+    const script = getInjectScript(companyName, bgColor, textColor, scriptUrl);
     setGeneratedScript(script);
   };
 

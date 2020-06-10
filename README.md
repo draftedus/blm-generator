@@ -13,11 +13,17 @@ If you'd like to embed this script on your own site, but don't want to use an el
 
 NOTE: For now, you need to make sure that the element you're injecting into exists by the time this script is invoked. Generally this means putting the script at the bottom of the `<body>`
 
+### Customize Script URL for Injection
+
+If you decide to fork `blm-banner` but want to use this app for generation still, you can specify the script URL used in the code snippet using `data-script-url`.
+
+```html
+<script src="dist/blm.generator.js" data-script-url="//example.com/forked.blm.min.js"></script>
+```
+
 ### Development
 
 First things first, run `npm ci` in order to install the dependencies you will need to develop the project.
-
-
 
 In the project directory, you can run:
 
