@@ -1,7 +1,5 @@
 # Black Lives Matter <script> generator form
-This application is meant to be used in combination with 
-
-[BLM Banner]: https://github.com/draftedus/blm-banner	"Black Lives Matter Banner"
+This application is meant to be used in combination with the [BLM Banner](https://github.com/draftedus/blm-banner) project
 
 It allows users to generate the injection script with a different company name and colors.
 
