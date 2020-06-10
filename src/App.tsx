@@ -1,7 +1,6 @@
 import React, { FormEvent, useState } from "react";
 import { useClipboard } from "use-clipboard-copy";
 import { getInjectScript } from "./helpers";
-import "./App.styled";
 import {
   Button,
   CopyCode,
@@ -17,26 +16,41 @@ import {
   TextArea,
 } from "./App.styled";
 
+/**
+ * Set our default props for the WYSIWYG preview
+ */
 const DEFAULT_SCRIPT_PROPS = {
   companyName: "Drafted",
   bgColor: "#000000",
   textColor: "#FFFFFF",
 };
+
+/**
+ * Grab the default script shown in the embed code textarea
+ */
 const DEFAULT_SCRIPT = getInjectScript(
   DEFAULT_SCRIPT_PROPS.companyName,
   DEFAULT_SCRIPT_PROPS.bgColor,
   DEFAULT_SCRIPT_PROPS.textColor
 );
 
-function App() {
-  const [companyName, setCompanyName] = useState(
-    DEFAULT_SCRIPT_PROPS.companyName
-  );
+/**
+ * Main functional component that is injected into the page
+ * @constructor
+ */
+const App: React.FC = () => {
+
+  // Setup our state
+  const [companyName, setCompanyName] = useState(DEFAULT_SCRIPT_PROPS.companyName);
   const [bgColor, setBgColor] = useState(DEFAULT_SCRIPT_PROPS.bgColor);
   const [textColor, setTextColor] = useState(DEFAULT_SCRIPT_PROPS.textColor);
   const [generatedScript, setGeneratedScript] = useState(DEFAULT_SCRIPT);
   const clipboard = useClipboard({ copiedTimeout: 750 });
 
+  /**
+   * Handle onClick to grab new embed code
+   * @param e
+   */
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const script = getInjectScript(companyName, bgColor, textColor);

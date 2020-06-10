@@ -19,9 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "npm run build:react && npm run build:bundle",
-    "build:react": "react-scripts build",
-    "build:bundle": "rollup src/index.tsx --config rollup.config.js",
+    "build": "rollup src/index.tsx --config rollup.config.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
