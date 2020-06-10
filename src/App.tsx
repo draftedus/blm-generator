@@ -11,7 +11,6 @@ import {
   InputRow,
   Label,
   SectionInfo,
-  SpacedInput,
   StyledApp,
   TextArea,
 } from './App.styled';
@@ -84,14 +83,14 @@ const App: React.FC = () => {
               <Label>Text Color</Label>
               <ColorPickerInput
                 value={textColor}
-                onChange={(v) => setTextColor(v)}
+                onChange={(v) => setTextColor(v?.toUpperCase())}
               />
             </InputGroup>
             <InputGroup>
               <Label>BG Color</Label>
               <ColorPickerInput
                 value={bgColor}
-                onChange={(v) => setBgColor(v)}
+                onChange={(v) => setBgColor(v?.toUpperCase())}
               />
             </InputGroup>
           </InputRow>
