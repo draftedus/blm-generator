@@ -106,3 +106,21 @@ export const CopyCode = styled.div`
     margin-left: 30px;
   }
 `;
+
+export const CheckBoxSection = styled.div`
+  padding-bottom: 50px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const CheckBox = styled.input`
+  margin-right: 20px;
+`;
+
+export const CheckBoxLabel = styled.span`
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: bold;
+`;
