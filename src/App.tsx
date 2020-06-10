@@ -43,7 +43,7 @@ const DEFAULT_SCRIPT_PROPS = {
   companyName: 'Drafted',
   bgColor: '#000000',
   textColor: '#FFFFFF',
-  metricsEnabled: false,
+  metricsEnabled: true,
 };
 
 /**
