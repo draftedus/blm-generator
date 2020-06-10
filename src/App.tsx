@@ -15,6 +15,7 @@ import {
   StyledApp,
   TextArea,
 } from './App.styled';
+import ColorPickerInput from './components/color-picker-input/ColorPickerInput';
 
 /**
  * Grab the script URL we are using to generate the snippet
@@ -81,18 +82,16 @@ const App: React.FC = () => {
             </InputGroup>
             <InputGroup>
               <Label>Text Color</Label>
-              <SpacedInput
-                type="text"
+              <ColorPickerInput
                 value={textColor}
-                onChange={(e) => setTextColor(e.target.value)}
+                onChange={(v) => setTextColor(v)}
               />
             </InputGroup>
             <InputGroup>
               <Label>BG Color</Label>
-              <SpacedInput
-                type="text"
+              <ColorPickerInput
                 value={bgColor}
-                onChange={(e) => setBgColor(e.target.value)}
+                onChange={(v) => setBgColor(v)}
               />
             </InputGroup>
           </InputRow>
