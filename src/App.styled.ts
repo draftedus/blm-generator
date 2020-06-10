@@ -124,3 +124,14 @@ export const CheckBoxLabel = styled.span`
   line-height: 22px;
   font-weight: bold;
 `;
+
+export const Domains = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  a {
+    color: white;
+    margin-right: 10px;
+  }
+`;

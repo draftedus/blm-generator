@@ -1,6 +1,6 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { useClipboard } from 'use-clipboard-copy';
-import { getInjectScript, getScriptAttribute } from './helpers';
+import { fullUrl, getInjectScript, getScriptAttribute } from './helpers';
 import {
   Button,
   CheckBoxLabel,
@@ -17,7 +17,9 @@ import {
   CheckBox,
   CheckBoxSection,
   SpacedInput,
+  Domains,
 } from './App.styled';
+import { getDomains } from './metrics';
 
 /**
  * Grab the script URL we are using to generate the snippet
@@ -25,6 +27,13 @@ import {
 const scriptUrl =
   getScriptAttribute('data-script-url') ??
   '//blmtech.s3.amazonaws.com/blm.min.js';
+
+/**
+ * Metrics URL used to list domains
+ */
+const metricsUrl =
+  getScriptAttribute('data-metrics-url') ??
+  'https://blmtech-prod.drft.workers.dev';
 
 /**
  * Set our default props for the WYSIWYG preview
@@ -62,6 +71,7 @@ const App: React.FC = () => {
     DEFAULT_SCRIPT_PROPS.metricsEnabled,
   );
   const [generatedScript, setGeneratedScript] = useState(DEFAULT_SCRIPT);
+  const [domains, setDomains] = useState([]);
   const clipboard = useClipboard({ copiedTimeout: 750 });
 
   /**
@@ -79,6 +89,15 @@ const App: React.FC = () => {
     );
     setGeneratedScript(script);
   };
+
+  // Grab our domains if we can and set them
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getDomains(metricsUrl);
+      setDomains(result.domains);
+    };
+    fetchData().catch((err) => console.error('Failed to fetch domains', err));
+  }, []);
 
   return (
     <StyledApp>
@@ -136,6 +155,13 @@ const App: React.FC = () => {
           {clipboard.copied ? 'Copied' : 'Copy'}
         </Button>
       </CopyCode>
+      <Domains>
+        {domains.map((d: { companyName: string; domain: string }) => (
+          <a href={fullUrl(d.domain)} target="_blank">
+            {d.companyName}
+          </a>
+        ))}
+      </Domains>
     </StyledApp>
   );
 };

@@ -29,3 +29,12 @@ export const getScriptAttribute = (attr: string): string | null => {
   const scripts = document.getElementsByTagName('script');
   return scripts[scripts.length - 1]?.getAttribute(attr);
 };
+
+/**
+ * Generate full url for domains
+ * @param url
+ */
+export const fullUrl = (url: string) => {
+  if (url.indexOf('http') === -1) return `https://${url}`;
+  return url;
+};
