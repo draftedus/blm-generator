@@ -3,6 +3,7 @@ import { useClipboard } from 'use-clipboard-copy';
 import { getInjectScript, getScriptAttribute } from './helpers';
 import {
   Button,
+  CheckBoxLabel,
   CopyCode,
   CustomizeSection,
   Form,
@@ -13,6 +14,8 @@ import {
   SectionInfo,
   StyledApp,
   TextArea,
+  CheckBox,
+  CheckBoxSection,
 } from './App.styled';
 import ColorPickerInput from './components/color-picker-input/ColorPickerInput';
 
@@ -30,6 +33,7 @@ const DEFAULT_SCRIPT_PROPS = {
   companyName: 'Drafted',
   bgColor: '#000000',
   textColor: '#FFFFFF',
+  allowMetrics: false,
 };
 
 /**
@@ -39,6 +43,7 @@ const DEFAULT_SCRIPT = getInjectScript(
   DEFAULT_SCRIPT_PROPS.companyName,
   DEFAULT_SCRIPT_PROPS.bgColor,
   DEFAULT_SCRIPT_PROPS.textColor,
+  DEFAULT_SCRIPT_PROPS.allowMetrics,
   scriptUrl,
 );
 
@@ -53,6 +58,9 @@ const App: React.FC = () => {
   );
   const [bgColor, setBgColor] = useState(DEFAULT_SCRIPT_PROPS.bgColor);
   const [textColor, setTextColor] = useState(DEFAULT_SCRIPT_PROPS.textColor);
+  const [allowMetrics, setAllowMetrics] = useState(
+    DEFAULT_SCRIPT_PROPS.allowMetrics,
+  );
   const [generatedScript, setGeneratedScript] = useState(DEFAULT_SCRIPT);
   const clipboard = useClipboard({ copiedTimeout: 750 });
 
@@ -62,7 +70,13 @@ const App: React.FC = () => {
    */
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const script = getInjectScript(companyName, bgColor, textColor, scriptUrl);
+    const script = getInjectScript(
+      companyName,
+      bgColor,
+      textColor,
+      allowMetrics,
+      scriptUrl,
+    );
     setGeneratedScript(script);
   };
 
@@ -95,6 +109,16 @@ const App: React.FC = () => {
             </InputGroup>
           </InputRow>
         </CustomizeSection>
+        <CheckBoxSection>
+          <CheckBox
+            type="checkbox"
+            checked={allowMetrics}
+            onChange={() => setAllowMetrics(!allowMetrics)}
+          />
+          <CheckBoxLabel>
+            Add me to the list below when I install this
+          </CheckBoxLabel>
+        </CheckBoxSection>
         <SectionInfo>
           <Button type="submit">Refresh Embed Code</Button>
         </SectionInfo>
