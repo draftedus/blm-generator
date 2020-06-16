@@ -27,7 +27,7 @@ import { getDomains } from './metrics';
  */
 const scriptUrl =
   getScriptAttribute('data-script-url') ??
-  '//blmtech.s3.amazonaws.com/blm.min.js';
+  'https://blmtech.s3.amazonaws.com/blm.min.js';
 
 /**
  * Metrics URL used to list domains
